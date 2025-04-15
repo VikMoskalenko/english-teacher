@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap');
+
+
+body {
+  font-family: "DM Serif Text", serif;
+  font-style: normal;
+  font-size: 15px;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+.site-header {
+  background-color: white;
+  border-bottom: 1px solid #ccc;
+  padding: .5em 1em;
+}
+.site-header::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.site-identity {
+  float: left;
+}
+.site-identity h1 {
+  font-size: 1.5em;
+  margin: .7em 0 .3em 0;
+  display: inline-block;
+}
+.site-identity img {
+  max-width: 55px;
+  float: left;
+  margin: 0 10px 0 0;
+}
+
+.site-navigation {
+  float: right;
+}
+.site-navigation ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+.site-navigation li {
+  display: inline-block;
+  margin: 1.4em 1em 1em 1em;
+}
+.site-navigation li a:hover {
+  color: lightgray;
+}
+/*nav a:hover {*/
+/*  color: lightblue;*/
+/*}*/
+/*.navbar-logo {*/
+/*  max-width: 55px; !* Maintain aspect ratio *!*/
+/*  margin-right: 5px;*/
+/*}*/
+

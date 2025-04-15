@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}English Teacher{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css'  %}">
+</head>
+<body>
+  <header class="site-header">
+      <div class="site-identity">
+      <a href="/">
+            <img src="{% static 'img/english.png' %}" alt="navbar-logo">
+      </a>
+      <h1><a href="#">Learn English</a> </h1>
+      </div>
+    <nav class="site-navigation">
+        <ul class="nav">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/lessons">Lessons</a></li>
+            <li><a href="/contact">Contact</a></li>
+    </ul>
+  </nav>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <p>© 2025 English with Vik</p>
+  </footer>
+</body>
+</html>
