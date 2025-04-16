@@ -3,8 +3,13 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-  <h2>Welcome to the English Learning Platform!</h2>
-  <p>Learn English with fun, interactive, and personalized lessons.</p>
+  <section class="hero-section">
+    <div class="hero-content">
+      <h2 class="hero-title">Welcome to the English Learning Platform!</h2>
+      <p class="hero-subtitle">Learn English with fun, interactive, and personalized lessons.</p>
+      <a href="{% url 'lessons' %}" class="hero-button">Explore Lessons</a>
+    </div>
+  </section>
 {% endblock %}
 
 

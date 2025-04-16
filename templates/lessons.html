@@ -3,6 +3,50 @@
 {% block title %}Lessons{% endblock %}
 
 {% block content %}
-  <h2>Choose what fits you</h2>
-  <p>There are some options for you:</p>
+
+  <section class="lessons-section">
+    <h2 class="lessons-title">Choose what fits you</h2>
+    <p class="lessons-intro">
+      At English Dream Teacher, we offer high-quality English lessons designed to fit every learner’s needs. Whether you're just starting or looking to polish your skills, we have the perfect option for you:
+    </p>
+
+{#    <ul class="lessons-list">#}
+{#      <li><strong>Children’s Lessons:</strong> Fun, interactive, and age-appropriate classes that build a strong foundation in English.</li>#}
+{#      <li><strong>Private Lessons for Adults:</strong> Personalized one-on-one sessions focused on your goals, pace, and learning style.</li>#}
+{#      <li><strong>Group Lessons:</strong> Learn together in a friendly environment that encourages communication and collaboration.</li>#}
+{#      <li><strong>Speaking Clubs:</strong> Boost your confidence and fluency through engaging conversations on real-life topics.</li>#}
+{#    </ul>#}
+      <main class="page-content">
+  <div class="card">
+    <div class="content">
+      <h2 class="title">Children’s Lessons</h2>
+      <p class="copy">Fun, interactive, and age-appropriate classes that build a strong foundation in English.</p>
+      <button class="btn">View Prices</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="content">
+      <h2 class="title">Private Lessons</h2>
+      <p class="copy">Personalized one-on-one sessions focused on your goals, pace, and learning style.</p>
+      <button class="btn">View Prices</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="content">
+      <h2 class="title">Group Lessons</h2>
+      <p class="copy">Learn together in a friendly environment that encourages communication and collaboration</p>
+      <button class="btn">View Prices</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="content">
+      <h2 class="title">Speaking Clubs</h2>
+      <p class="copy">Boost your confidence and fluency through engaging conversations on real-life topics</p>
+      <button class="btn">View Prices</button>
+    </div>
+  </div>
+</main>
+
+    <p class="lessons-outro">No matter your age or level, we’re here to make learning English enjoyable and effective!</p>
+  </section>
 {% endblock %}
