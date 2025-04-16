@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Book{% endblock %}
+
+{% block content %}
+  <section class="book-section">
+    <div class="book-content">
+      <h2 class="book-title">Welcome to the English Learning Platform!</h2>
+      <p class="book-subtitle">Are you ready to book your lesson with us?</p>
+      <a href="{% url 'book' %}" class="book-button">Book My Lesson!</a>
+    </div>
+  </section>
+{% endblock %}

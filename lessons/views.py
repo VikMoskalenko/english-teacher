@@ -14,3 +14,6 @@ def contact(request):
 def lessons(request):
     return render(request, 'lessons.html')
 
+def book(request):
+    return render(request, 'book.html')
+
