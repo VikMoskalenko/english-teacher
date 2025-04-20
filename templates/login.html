@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+  <section class="login-section">
+    <div class="login-box">
+    <h2>Login to Your Account</h2>
+    <form method="POST" class="login-form">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      <div class="form-group">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+        {{ form.username.errors }}
+      </div>
+
+      <div class="form-group">
+        {{ form.password.label_tag }}
+        {{ form.password }}
+        {{ form.password.errors }}
+      </div>
+
+      <button type="submit" class="login-btn">Login</button>
+    </form>
+    <p class="login-link">Don't have an account? <a href="{% url 'register' %}">Register here</a>.</p>
+  </div>
+
+  </section>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}My Lessons{% endblock %}
+
+{% block content %}
+<section class="cart-section">
+  <h2>Your Added Lessons</h2>
+  {% if lessons %}
+    <ul class="lesson-list">
+      {% for lesson in lessons %}
+        <li>{{ lesson.title }} - {{ lesson.price }} GBP</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No lessons in your basket.</p>
+      <form method="POST" action="{% url 'add_to_cart' lesson.id %}">
+  {% csrf_token %}
+  <button type="submit">Add to basket</button>
+</form>
+  {% endif %}
+</section>
+{% endblock %}

@@ -4,10 +4,59 @@
 
 {% block content %}
   <section class="book-section">
-    <div class="book-content">
-      <h2 class="book-title">Welcome to the English Learning Platform!</h2>
-      <p class="book-subtitle">Are you ready to book your lesson with us?</p>
-      <a href="{% url 'book' %}" class="book-button">Book My Lesson!</a>
+  <div class="free-lesson-form">
+  <div class="form-info">
+    <h2>First lesson for free</h2>
+    <ul>
+      <li>✔ Will choose the best option</li>
+      <li>✔ Answer on all questions</li>
+      <li>✔ Will check current level</li>
+      <li>✔ Will aim your goal</li>
+    </ul>
+    <p class="subheadline">✨ What a pleasure, joy and fun</p>
+  </div>
+
+  <form method="POST" class="form-fields">
+      {% csrf_token %}
+    <input type="text" name="name" placeholder="Name and Surname" required />
+    <input type="email" name="email" placeholder="E-mail" required />
+    <div class="phone-wrapper">
+      <span>+44</span>
+      <input type="tel" name="phone" placeholder="Phone" required />
     </div>
+{#       <input type="date" name="date" required />#}
+      <input type="hidden" name="date" value="{{ today }}" />
+    <button type="submit" id="submit-button" disabled>Sign me</button>
+    <label class="consent">
+      <input type="checkbox" name="consent" id="consent-checkbox" />
+      I give consent to this booking...
+    </label>
+  </form>
+</div>
+{% if message %}
+  <div class="popup-message {% if success %}success{% else %}error{% endif %}">
+    {{ message }}
+  </div>
+{% endif %}
+
+
+{#    <div class="book-content">#}
+{#      <h2 class="book-title">Welcome to the English Learning Platform!</h2>#}
+{#      <p class="book-subtitle">Are you ready to book your lesson with us?</p>#}
+{#      <a href="{% url 'book' %}" class="book-button">Book My Lesson!</a>#}
+{#    </div>#}
+  <script>
+  const checkbox = document.getElementById('consent-checkbox');
+  const button = document.getElementById('submit-button');
+
+  checkbox.addEventListener('change', function () {
+    button.disabled = !this.checked;
+
+  });
+  setTimeout(() => {
+    const popup = document.querySelector('.popup-message');
+    if (popup) popup.style.display = 'none';
+  }, 3000);
+</script>
   </section>
 {% endblock %}
