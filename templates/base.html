@@ -58,22 +58,33 @@
         <div class="container">
         <div class="row">
           <div class="col-md-8 col-sm-6 col-xs-12">
-            <p class="copyright-text">Copyright &copy; 2025 All Rights Reserved by
-         <a href="#">VM</a>.
-            </p>
-          </div>
 
+          </div>
+            <div style="text-align: center; margin-top: 20px;">
+      <p>&copy; <span id="year"></span> Dream Teacher. All rights reserved.</p>
+    </div>
+{#            <div class="footer-section">#}
+{#        <div class="social-media social-icons">#}
+{#          <a href="https://facebook.com" target="_blank"><i class="fa fa-facebook-f"></i></a>#}
+{#          <a href="https://twitter.com" target="_blank"><i class="fa fa-twitter"></i></a>#}
+{#          <a href="https://instagram.com" target="_blank"><i class="fa fa-instagram"></i></a>#}
+{#        </div>#}
+{#                </div>#}
           <div class="col-md-4 col-sm-6 col-xs-12">
             <ul class="social-icons">
-              <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-              <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-              <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+              <li><a class="facebook" href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a></li>
+              <li><a class="twitter" href="https://x.com/"><i class="fab fa-twitter"></i></a></li>
+              <li><a class="linkedin" href="https://www.linkedin.com/"><i class="fab fa-linkedin"></i></a></li>
             </ul>
           </div>
         </div>
       </div>
 {#    <p>© 2025 English with Vik</p>#}
       <script src="{% static 'js/script.js' %}"></script>
+       <script>
+    // Set the current year in the footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
   </footer>
 </body>
 </html>

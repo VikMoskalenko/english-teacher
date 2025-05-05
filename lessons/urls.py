@@ -12,7 +12,9 @@ urlpatterns = [
     path('register/', views.register_view, name='register'),
     path('prices/', views.price_view, name='prices'),
     path('pay/', views.pay_view, name='pay'),
-    path('cart/', views.cart_view, name='cart'),
-
+     path('cart/', views.cart_view, name='cart'),
+    path('add-to-cart/<int:lesson_id>', views.add_to_cart, name='add_to_cart'),
+path('remove-from-cart/<int:lesson_id>/', views.remove_from_cart, name='remove_from_cart'),
+path('process-payment/', views.process_payment, name='process_payment'),
     #api-pay
 ]

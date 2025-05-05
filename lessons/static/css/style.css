@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap');
-
-
+@import url('https://fonts.googleapis.com/css2?family=Lavishly+Yours&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lavishly+Yours&family=Mystery+Quest&display=swap');
 body {
   font-family: "DM Serif Text", serif;
   font-style: normal;
@@ -207,13 +207,59 @@ a {
   width:34px;
   font-size:14px
 }
+
+/*new*/
+  .footer-section {
+      flex: 1;
+      min-width: 250px;
+      margin: 10px;
+      animation: slideIn 1s ease-in-out;
+    }
+
+ .social-media a {
+      margin: 0 10px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.5em;
+      transition: color 0.3s;
+ }
+
+    .social-media a:hover {
+      color: #1da1f2;
+    }
+     @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
 .social-icons a.facebook:hover
 {
   background-color:#3b5998
 }
 .social-icons a.twitter:hover
 {
-  background-color:#00aced
+  background-color:#00aced;
+  background-image: url("lessons/static/img/twitter.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 .social-icons a.linkedin:hover
 {
@@ -590,7 +636,7 @@ html, body {
   color: white;
   font-family: Arial, sans-serif;
   max-width: 400px;
-  margin: auto;
+  margin: 30px auto;
 }
 
 .form-info h2 {
@@ -857,4 +903,176 @@ html, body {
   border-radius: 50%;
   padding: 0.1em 0.4em;
   font-size: 0.75rem;
+}
+
+.lessons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.lesson-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 16px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.lesson-card h2 {
+  font-size: 1.4em;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.price-info {
+  text-align: center;
+  font-family: "Mystery Quest", system-ui;
+  font-size: 20px;
+  font-style: normal;
+}
+
+.lesson-card button {
+  display: block;
+  font-size:15px;
+  margin: 12px auto 0;
+  background-color: deeppink;
+  color: white;
+  font-weight: bold;
+  padding: 15px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.lesson-card button:hover {
+  background-color: #e259a7;
+}
+
+@media (min-width: 768px) {
+  .lesson-card {
+    flex: 1 1 calc(50% - 20px);
+    max-width: calc(50% - 20px);
+  }
+}
+
+
+.cart-section {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #fdfdfd;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.cart-section h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.lesson-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+
+.lesson-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f7f9fc;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #e1e5ea;
+}
+
+.lesson-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f7f9fc;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid #e1e5ea;
+}
+
+.remove-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.lesson-list button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.lesson-list button:hover {
+  background-color: #b02a37;
+}
+
+.cart-section p strong {
+  display: contents;
+  text-align: right;
+  margin-top: 20px;
+  font-size: 1.1rem;
+  color: #222;
+}
+.payment-section {
+  margin-top: 30px;
+  padding: 20px;
+  background: #f4f4f8;
+  border-radius: 10px;
+}
+
+.payment-section label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.payment-section input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.pay-btn {
+  display: block;
+  margin: 0 auto;
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.pay-btn:hover {
+  background-color: #218838;
 }

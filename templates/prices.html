@@ -4,6 +4,19 @@
 
 {% block content %}
   <section class="price-section">
+    <div class="lessons">
+  {% for lesson in lessons %}
+    <div class="lesson-card">
+      <h2>{{ lesson.title }}</h2>
+      <p class="price-info">{{ lesson.description }}</p>
+      <p class="price-info"><strong>Price: </strong>{{ lesson.price }}£</p>
 
+      <form action="{% url 'add_to_cart' lesson.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Add to Cart</button>
+      </form>
+    </div>
+  {% endfor %}
+</div>
   </section>
 {% endblock %}

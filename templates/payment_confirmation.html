@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Payment Confirmation{% endblock %}
+
+{% block content %}
+<section class="confirmation-section">
+  <h2>Thank you for your payment!</h2>
+  <p>Your payment was successful. You have purchased the following lessons:</p>
+  <ul>
+    {% for lesson in lessons %}
+      <li>{{ lesson.title }} - {{ lesson.price }} GBP</li>
+    {% endfor %}
+  </ul>
+  <p><strong>Total Paid:</strong> {{ total }} GBP</p>
+  <p>A receipt has been sent to your email.</p>
+</section>
+{% endblock %}

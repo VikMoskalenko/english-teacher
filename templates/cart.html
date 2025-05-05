@@ -4,18 +4,55 @@
 {% block content %}
 <section class="cart-section">
   <h2>Your Added Lessons</h2>
-  {% if lessons %}
+
+  {% if lesson_data %}
     <ul class="lesson-list">
-      {% for lesson in lessons %}
-        <li>{{ lesson.title }} - {{ lesson.price }} GBP</li>
+      {% for item in lesson_data %}
+        <li class="lesson-row">
+          <span>
+            {{ item.lesson.title }} - {{ item.lesson.price }} GBP × {{ item.quantity }}
+          </span>
+          <form method="POST" action="{% url 'remove_from_cart' item.lesson.id %}">
+            {% csrf_token %}
+            <button type="submit" class="remove-btn">Remove one</button>
+          </form>
+        </li>
       {% endfor %}
     </ul>
+
+    <p><strong>Total lessons:</strong> {{ request.session.cart|length }}</p>
+
+     <!-- Payment form -->
+    <section class="payment-section">
+      <h3>Payment Details</h3>
+      <form method="POST" action="{% url 'process_payment' %}">
+        {% csrf_token %}
+
+        <label for="card_number">Card Number</label>
+        <input type="text" name="card_number" id="card_number" required pattern="\d{16}" placeholder="1234 5678 9012 3456">
+
+        <label for="name_surname">Cardholder Name</label>
+        <input type="text" name="name_surname" id="name_surname" required placeholder="John Doe">
+
+        <label for="exp_date">Expiration Date (MM/YY)</label>
+        <input type="text" name="exp_date" id="exp_date" required pattern="\d{2}/\d{2}" placeholder="MM/YY">
+
+        <label for="ccv">CCV</label>
+        <input type="text" name="ccv" id="ccv" required pattern="\d{3}" placeholder="123">
+
+        <p><strong>Payment Info:</strong></p>
+        <ul>
+          <li>{{ request.session.cart|length }} Lessons</li>
+          <li>Total: {{ total }} GBP</li>
+        </ul>
+
+        <button type="submit" class="pay-btn">Pay Now</button>
+      </form>
+    </section>
+
   {% else %}
     <p>No lessons in your basket.</p>
-      <form method="POST" action="{% url 'add_to_cart' lesson.id %}">
-  {% csrf_token %}
-  <button type="submit">Add to basket</button>
-</form>
   {% endif %}
 </section>
 {% endblock %}
+
