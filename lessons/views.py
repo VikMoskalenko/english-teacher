@@ -1,5 +1,8 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from sqlparse.utils import consume
+
 from .forms import RegisterForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
@@ -13,6 +16,7 @@ from django.contrib import messages
 from .models import Payment, Lesson
 from django.core.mail import send_mail
 from django.conf import settings
+from datetime import date
 
 def home(request):
     if request.method == "GET":
@@ -34,7 +38,9 @@ def api_book(request):
     if request.method == "POST":
         name = request.POST.get('name')
         email = request.POST.get('email')
-        date = request.POST.get('date')  # optional if not using yet
+        phone = request.POST.get('phone')
+        consent = request.POST.get('consent')
+        submitted_date = request.POST.get('date')
 
         if not name or not email:
             return render(request, 'book.html', {
@@ -44,7 +50,7 @@ def api_book(request):
             })
 
         try:
-            Booking.objects.create(name=name, email=email, date=date)
+            Booking.objects.create(name=name, email=email,phone=phone, date=submitted_date, consent=consent)
             return render(request, 'book.html', {
                 'success': True,
                 'message': 'Your request is confirmed!',
@@ -57,7 +63,7 @@ def api_book(request):
                 'today': date.today()
             })
 
-    return render(request, 'book.html')
+    return render(request, 'book.html', {'today': date.today()})
 
 
 def register_view(request):
@@ -109,28 +115,30 @@ def process_payment(request):
             messages.error(request, 'Invalid card number. Please enter a 16-digit number.')
             return redirect('cart')
 
-
-def add_to_cart(request, lesson_id):
-    cart = request.session.get('cart', [])
-    if lesson_id not in cart:
-        cart.append(lesson_id)
-        request.session['cart'] = cart
-    return redirect('prices')
-
 def cart_view(request):
+    from collections import Counter
+
     cart = request.session.get('cart', [])
     cart_counter = Counter(cart)
 
     lessons = Lesson.objects.filter(id__in=cart)
 
     lesson_data = []
+    total = 0
+
     for lesson in lessons:
+        quantity = cart_counter[str(lesson.id)] if str(lesson.id) in cart_counter else cart_counter[lesson.id]
         lesson_data.append({
             'lesson': lesson,
-            'quantity': cart_counter[str(lesson.id)] if str(lesson.id) in cart_counter else cart_counter[lesson.id],
+            'quantity': quantity,
         })
+        total += lesson.price * quantity
 
-    return render(request, 'cart.html', {'lesson_data': lesson_data})
+    return render(request, 'cart.html', {
+        'lesson_data': lesson_data,
+        'total': total
+    })
+
 
 def add_to_cart(request, lesson_id):
     cart = request.session.get('cart', [])
@@ -138,8 +146,6 @@ def add_to_cart(request, lesson_id):
         cart.append(lesson_id)
     request.session['cart'] = cart
     return redirect('prices')
-
-
 
 @require_POST
 def remove_from_cart(request, lesson_id):
@@ -149,7 +155,7 @@ def remove_from_cart(request, lesson_id):
     request.session['cart'] = cart
     return redirect('cart')
 
-
+@login_required
 def process_payment(request):
     if request.method == 'POST':
         card_number = request.POST.get('card_number').replace(' ', '')
@@ -177,16 +183,39 @@ def process_payment(request):
                 f"Thank you for your payment!\n\nYou purchased the following lessons:\n\n"
                 f"{lesson_list}\n\nTotal paid: {total} GBP"
             )
+            email_message = (
+                f"Dear {request.user.first_name},\n\n"
+                f"Thank you for your payment!\n\n"
+                f"You have purchased the following lessons:\n\n"
+                f"{lesson_list}\n\n"
+                f"Total paid: {total} GBP\n\n"
+                f"Best regards,\nDream Teacher Team"
+            )
 
             send_mail(
                 subject="Lesson Payment Confirmation",
-                message=message,
+                message=email_message,
                 from_email=settings.DEFAULT_FROM_EMAIL,
                 recipient_list=[request.user.email],
             )
-
+            request.session['last_paid_lessons'] = [lesson.id for lesson in lessons]
+            request.session['last_total'] = float(total)
             request.session['cart'] = []
             return redirect('payment_confirmation')
 
         messages.error(request, 'Invalid card number or empty cart.')
         return redirect('cart')
+
+
+@login_required
+def payment_confirmation(request):
+    lesson_ids = request.session.get('last_paid_lessons', [])
+    total = request.session.get('last_total', 0)
+
+    lessons = Lesson.objects.filter(id__in=lesson_ids)
+
+    return render(request, 'payment_confirmation.html', {
+        'lessons': lessons,
+        'total': total
+    })
+    #return render(request, 'payment_confirmation.html')

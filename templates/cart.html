@@ -20,9 +20,10 @@
       {% endfor %}
     </ul>
 
-    <p><strong>Total lessons:</strong> {{ request.session.cart|length }}</p>
+    <p><strong>Total lessons:</strong> {{ request.session.cart| length  }}</p>
 
      <!-- Payment form -->
+      {% if user.is_authenticated %}
     <section class="payment-section">
       <h3>Payment Details</h3>
       <form method="POST" action="{% url 'process_payment' %}">
@@ -49,9 +50,12 @@
         <button type="submit" class="pay-btn">Pay Now</button>
       </form>
     </section>
+          {% else %}
+  <p><a href="{% url 'login' %}">Log in</a> to complete your purchase.</p>
+{% endif %}
 
   {% else %}
-    <p>No lessons in your basket.</p>
+    <h2>No lessons in your basket.</h2>
   {% endif %}
 </section>
 {% endblock %}

@@ -932,7 +932,7 @@ html, body {
 }
 .price-info {
   text-align: center;
-  font-family: "Mystery Quest", system-ui;
+  font-family: "DM Serif Text", serif;
   font-size: 20px;
   font-style: normal;
 }
@@ -941,7 +941,7 @@ html, body {
   display: block;
   font-size:15px;
   margin: 12px auto 0;
-  background-color: deeppink;
+  background-color: #6c63ff;
   color: white;
   font-weight: bold;
   padding: 15px 24px;
@@ -952,7 +952,7 @@ html, body {
 }
 
 .lesson-card button:hover {
-  background-color: #e259a7;
+  background-color: #9996d3;
 }
 
 @media (min-width: 768px) {
@@ -1075,4 +1075,55 @@ html, body {
 }
 .pay-btn:hover {
   background-color: #218838;
+}
+
+.confirmation-section {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px 40px;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  font-family: "DM Serif Text", serif;
+}
+
+.confirmation-section h2 {
+  font-size: 28px;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.confirmation-section p {
+  font-size: 16px;
+  color: #34495e;
+  margin: 10px 0;
+}
+
+.confirmation-section ul {
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.confirmation-section li {
+  font-size: 15px;
+  color: #2d3436;
+  margin-bottom: 8px;
+  list-style-type: disc;
+}
+
+.confirmation-section strong {
+  font-weight: 600;
+  color: #000;
+}
+
+@media (max-width: 600px) {
+  .confirmation-section {
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .confirmation-section h2 {
+    font-size: 24px;
+  }
 }

@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
 
 class LessonCategory(models.Model):
     name = models.CharField(max_length=100)
@@ -13,7 +14,9 @@ class Lesson(models.Model):
 class Booking(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
-    date = models.DateField(null=True, blank=True)
+    date = models.DateField(default=timezone.now)
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    consent = models.BooleanField(default=False)
 
 class Payment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

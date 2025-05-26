@@ -16,5 +16,6 @@ urlpatterns = [
     path('add-to-cart/<int:lesson_id>', views.add_to_cart, name='add_to_cart'),
 path('remove-from-cart/<int:lesson_id>/', views.remove_from_cart, name='remove_from_cart'),
 path('process-payment/', views.process_payment, name='process_payment'),
+path('payment-confirmation/', views.payment_confirmation, name='payment_confirmation'),
     #api-pay
 ]
