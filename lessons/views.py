@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from sqlparse.utils import consume
-
+from .forms import BookingForm
 from .forms import RegisterForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
@@ -34,37 +34,49 @@ def lessons(request):
     if request.method == "GET":
         return render(request, 'lessons.html')
 
-def api_book(request):
-    if request.method == "POST":
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        phone = request.POST.get('phone')
-        consent = request.POST.get('consent')
-        submitted_date = request.POST.get('date')
+# def book(request):
+#     if request.method == "POST":
+#         name = request.POST.get('name')
+#         email = request.POST.get('email')
+#         phone = request.POST.get('phone')
+#         consent = request.POST.get('consent')
+#         submitted_date = request.POST.get('date')
+#
+#         if not name or not email:
+#             return render(request, 'book.html', {
+#                 'success': False,
+#                 'message': 'Please fill in all required fields.',
+#                  'today': date.today()
+#             })
+#
+#         try:
+#             Booking.objects.create(name=name, email=email,phone=phone, date=submitted_date, consent=consent)
+#             return render(request, 'book.html', {
+#                 'success': True,
+#                 'message': 'Your request is confirmed!',
+#                 'today': date.today()
+#             })
+#         except Exception as e:
+#             return render(request, 'book.html', {
+#                 'success': False,
+#                 'message': 'Something went wrong. Please try again.',
+#                 'today': date.today()
+#             })
+#
+#     return render(request, 'book.html', {'today': date.today()})
+def book(request):
+    if request.method == 'POST':
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            booking = form.save(commit=False)
+            booking.date = date.today()
+            booking.save()
+            return render(request, 'book_success.html', {'name': booking.name})
+        else:
+            return render(request, 'book.html', {'form': form})
 
-        if not name or not email:
-            return render(request, 'book.html', {
-                'success': False,
-                'message': 'Please fill in all required fields.',
-                 'today': date.today()
-            })
-
-        try:
-            Booking.objects.create(name=name, email=email,phone=phone, date=submitted_date, consent=consent)
-            return render(request, 'book.html', {
-                'success': True,
-                'message': 'Your request is confirmed!',
-                'today': date.today()
-            })
-        except Exception as e:
-            return render(request, 'book.html', {
-                'success': False,
-                'message': 'Something went wrong. Please try again.',
-                'today': date.today()
-            })
-
-    return render(request, 'book.html', {'today': date.today()})
-
+    form = BookingForm()
+    return render(request, 'book.html', {'form': form})
 
 def register_view(request):
     if request.method == 'POST':
